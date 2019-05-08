@@ -1,0 +1,6 @@
+
+standardizing inputs yields 8800 mse after 1st epoch, 
+but not doing it yields 3700 mse
+
+unet 101k train size: 
+trainMse: 2323, valMse:2252

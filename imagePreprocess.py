@@ -52,31 +52,36 @@ print(data_IDs[33])
 
 
 def getImagesVarAndMean(imagePaths, imageShape):
-    '''returns mean and variance of given images
+    '''returns mean and variance of given images 
     and saves it .npy. 
     
+    Layers are in hsv order.
     if these images were previously processed,
     returns that stored value
     '''
     storeHash = abs(hash(tuple(imagePaths)))
+    print('hash',storeHash)
     targetFileName = dest + "VarAvg" + str(storeHash) + ".npy"
     if os.path.isfile(targetFileName):
-        mean, var = np.load(targetFileName)
-        return (mean, var)
+        var, mean = np.load(targetFileName)
+        return (var, mean)
     xSum = np.zeros(imageShape)
     xSumSquares = np.zeros(imageShape)
 
     for imgID in imagePaths:
+        #todo change to load hsv
         img = cv2.imread(imgID) #resizeImg(imgID)
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         #np.save(dest+imgID[:-4], img)
-        xSum += img
-        xSumSquares += img**2
+        #print('types',xSum.dtype,img.dtype)
+        xSum += hsv
+        xSumSquares += hsv**2
         
     mean = xSum / len(imagePaths)
     var = xSumSquares/len(imagePaths) - mean**2
     
     np.save(targetFileName, np.array([mean, var]))
-    return (mean,var)
+    return (var,mean)
 
 
 # In[118]:
