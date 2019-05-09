@@ -59,11 +59,12 @@ def getImagesVarAndMean(imagePaths, imageShape):
     if these images were previously processed,
     returns that stored value
     '''
-    storeHash = abs(hash(tuple(imagePaths)))
-    print('hash',storeHash)
-    targetFileName = dest + "VarAvg" + str(storeHash) + ".npy"
+    # hashes get seeded every session, so it's not ideal
+    #storeHash = abs(hash(tuple(imagePaths))) 
+    #print('hash',storeHash)
+    targetFileName = dest + "VarAvg" + str(len(imagePaths)) +".npy"
     if os.path.isfile(targetFileName):
-        var, mean = np.load(targetFileName)
+        mean, var = np.load(targetFileName)
         return (var, mean)
     xSum = np.zeros(imageShape)
     xSumSquares = np.zeros(imageShape)
@@ -72,12 +73,14 @@ def getImagesVarAndMean(imagePaths, imageShape):
         #todo change to load hsv
         img = cv2.imread(imgID) #resizeImg(imgID)
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        hsv = hsv.astype('int32') # squares didn't end up right because it was uint8
         #np.save(dest+imgID[:-4], img)
         #print('types',xSum.dtype,img.dtype)
         xSum += hsv
         xSumSquares += hsv**2
         
     mean = xSum / len(imagePaths)
+    #print('mean avg',mean.mean(), 'sumSquares avg', xSumSquares.mean())
     var = xSumSquares/len(imagePaths) - mean**2
     
     np.save(targetFileName, np.array([mean, var]))
