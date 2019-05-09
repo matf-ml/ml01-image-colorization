@@ -4,3 +4,7 @@ but not doing it yields 3700 mse
 
 unet 101k train size: 
 trainMse: 2323, valMse:2252
+
+unet with 2xconv making images too green,
+starts coloring faces properly after ~24 epochs
+val loss stops decreasing after ~24 epochs
