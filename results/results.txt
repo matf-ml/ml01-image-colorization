@@ -11,3 +11,11 @@ trainMse: 2323, valMse:2252
 unet with 2xconv making images too green,
 starts coloring faces properly after ~24 epochs
 val loss stops decreasing after ~24 epochs
+
+stopped working with he_normal initializer, works with glorot_uniform
+
+loss      | channels | size        | sec/epoch | startLearn | stopLearn
+customLoss mul=2,     big unet   = 160 
+MSE        mul=2,     big unet   = 160 
+MSE        mul=1,     small unet = 67  
+MSE        mul=2,     small unet = 108          2                7
