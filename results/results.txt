@@ -14,8 +14,14 @@ val loss stops decreasing after ~24 epochs
 
 stopped working with he_normal initializer, works with glorot_uniform
 
-loss      | channels | size        | sec/epoch | startLearn | stopLearn
-customLoss mul=2,     big unet   = 160 
-MSE        mul=2,     big unet   = 160 
-MSE        mul=1,     small unet = 67  
-MSE        mul=2,     small unet = 108          2                7
+loss      | channels | size   | sec/epoch | startLearn | stopLearn | lr
+customLoss mul=2,     big    = 160 
+customLoss mul=2,     small    = 116          5                       0.001 with 32 batch size it learns hue after 1st epoch!
+                                                                          0.0005 lr = ok but too pink
+MSE        mul=2,     big    = 160 
+MSE        mul=1,     big    = 93           1                         0.001, saved
+MSE        mul=1,     small  = 67  
+MSE        mul=2,     small  = 108          2                7
+customLoss mul=2,     big    = 200          5                         0.0005 
+
+customLoss mul=1      big      97            3                           0.001 (100xhue #3) - too much same color
