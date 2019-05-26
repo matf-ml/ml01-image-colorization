@@ -25,3 +25,6 @@ MSE        mul=2,     small  = 108          2                7
 customLoss mul=2,     big    = 200          5                         0.0005 
 
 customLoss mul=1      big      97            3                           0.001 (100xhue #3) - too much same color
+
+
+experimented with target normalization, leaky relu, sigmoid... didn't fare well
