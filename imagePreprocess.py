@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 
 
 # In[58]:
+dest = 'data/'
 
 
 def resizeImg(path):
@@ -37,15 +38,6 @@ def resizeImg(path):
 #img = resizeImg("data/img_celeba/000435.jpg")
 #imageShape = img.shape
 #plt.imshow(cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
-
-
-# In[109]:
-
-
-source = 'data/img_celeba/'
-dest = 'data/'
-data_IDs = ['data/resized/' + x for x in os.listdir(source)]
-print(data_IDs[33])
 
 
 # In[117]:
@@ -106,6 +98,9 @@ def resizeAllImages(imagePaths):
 
 
 def main():
+    source = 'data/img_celeba/'
+    data_IDs = ['data/resized/' + x for x in os.listdir(source)]
+    print(data_IDs[33])
     xAvg, xVar = getImagesVarAndMean(data_IDs, (128,128,3))
     # can be loaded with avg, var = np.load(dest+"VarAvg.npy")
     print(xVar.min(), xVar.max())
