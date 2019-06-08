@@ -1,4 +1,8 @@
 img_celeba/
+stl10/
 resized/
 *.npy
 *.h5
+
+# don't ignore the best model
+!lab_fully_trained.h5
