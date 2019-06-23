@@ -1,19 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[116]:
-
-
 import cv2
 import numpy as np
 import os
 #from tqdm import tqdm
 import matplotlib.pyplot as plt
 
-
-# In[58]:
 dest = 'data/'
-
 
 def resizeImg(path):
     img = cv2.imread(path)
@@ -30,18 +21,6 @@ def resizeImg(path):
     newImg = img[yfrom:yto, 0:width]
     newImg = cv2.resize(newImg, (wgoal, hgoal))
     return newImg
-
-
-# In[57]:
-
-
-#img = resizeImg("data/img_celeba/000435.jpg")
-#imageShape = img.shape
-#plt.imshow(cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
-
-
-# In[117]:
-
 
 def getImagesVarAndMean(imagePaths, imageShape):
     '''returns mean and variance of given images 
@@ -78,10 +57,6 @@ def getImagesVarAndMean(imagePaths, imageShape):
     np.save(targetFileName, np.array([mean, var]))
     return (var,mean)
 
-
-# In[118]:
-
-
 def resizeAllImages(imagePaths):
     destFolder = dest + "resized/"
     for imgPath in tqdm(imagePaths):
@@ -90,12 +65,6 @@ def resizeAllImages(imagePaths):
         #print(dest + name)
         cv2.imwrite(destFolder + name, resized)
         #np.save(destFolder+name, resized)
-        
-#resizeAllImages(data_IDs)
-
-
-# In[ ]:
-
 
 def main():
     source = 'data/img_celeba/'
@@ -105,4 +74,3 @@ def main():
     # can be loaded with avg, var = np.load(dest+"VarAvg.npy")
     print(xVar.min(), xVar.max())
     print(np.sqrt(xVar.min()), np.sqrt(xVar.max()) )
-
